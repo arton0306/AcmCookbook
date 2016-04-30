@@ -3,8 +3,6 @@ Important!
 The CalcMaxCycle only works for a graph whose each node exactly has ONE out edge
 Is is NP-Hard for find max cycle for a general graph.
 
-TODO: don't create a visited vector in for loop
-
 input
 4
 4
@@ -33,30 +31,33 @@ int dump(vector<int> const & g) {
     cout << endl;
 }
 
-// g is an adjcency list, node index start from 1
+// g is an adjcency list, node index START FROM 1
 int CalcMaxCycle(vector<int> const & g) {
-    int maxcyc = -1;
-    int newcyc = 0;
+    int maxcyc = 0;
+    int cyc = 0;
+    vector<int> visited(g.size(), 0);
+    int order = 1;
     for (int i = 1; i < g.size(); ++i) {
-        vector<int> visited(g.size(), 0);
-        int order = 1;
+        // TODO: clear visited flags if order > INT_MAX - g.size()
+        
+        if (visited[i] > 0) {
+            continue;
+        }
         int cur = i;
+        const int start_order = order;
         while (true) {
             visited[cur] = order;
             int next = g[cur];
-            cout << "cur " << cur << " next: " << next << endl;
-            if (visited[next] > 0) {
-                newcyc = order - visited[next] + 1;
+            if (visited[next] > start_order) {
+                cyc = order - visited[next] + 1;
                 break;
             } else {
                 cur = next;
                 ++order;
+                assert(order < INT_MAX);
             }
         }
-        // int newcyc = (order == 1 ? 0 : order);
-        if (maxcyc < newcyc) {
-            maxcyc = newcyc;
-        }
+        maxcyc = max(maxcyc, cyc);
     }
 
     return maxcyc;
