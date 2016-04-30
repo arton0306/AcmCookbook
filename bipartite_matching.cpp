@@ -1,3 +1,6 @@
+// time complexity: O(VE)
+// (from the book by iwi & wata & kita_masa, p221)
+
 int V;
 vector<int> G[MAX_V];
 int match[MAX_V];
