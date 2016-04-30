@@ -65,8 +65,26 @@ void rec(int n) {
     }
 }
 
+void nonrec(int n) {
+    int p = n;
+    do {
+        dump();
+        p = n;
+        rotate(n);
+        while (p>1 && v[p-1]==ov[p-1]) {
+            --p;
+            rotate(p);
+        }
+    } while (p>1);
+}
+
 int main() {
+    cout << "rec version" << endl;
     rec(4);
+
+    memcpy(v, ov, sizeof(v));
+    cout << "nonrec version" << endl;
+    nonrec(4);
 
     return 0;
 }
