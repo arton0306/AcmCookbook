@@ -1,6 +1,9 @@
 /*
 Important!
-the CalcMaxCycle only works for a graph whose each node exactly has ONE out edge
+The CalcMaxCycle only works for a graph whose each node exactly has ONE out edge
+Is is NP-Hard for find max cycle for a general graph.
+
+TODO: don't create a visited vector in for loop
 
 input
 4
