@@ -21,7 +21,8 @@ void dijkstra(int s, int t) {
                 v = u;
             }
         }
-        if (v == -1) break; // s is not connected to t
+        if (v == -1) break;
+        if (d[v] == INT_MAX) break;
         used[v] = true;
 
         for (int u = 0; u < V; ++u) {
